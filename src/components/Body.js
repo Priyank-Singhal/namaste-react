@@ -16,6 +16,7 @@ const Body = () => {
 
     //Whenever state variables update, react triggers a reconciliation cycle(re-renders the component)
     console.log("rendered");
+    console.log("filteredRes",filteredRes);
 
     useEffect(() => {
         console.log("calling fetch")
@@ -27,7 +28,8 @@ const Body = () => {
         const json = await data.json();
         // Optional Chaining
         const ResData = json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
-        // console.log("ResData", [ResData]);
+        console.log("json", [json]);
+        console.log("ResData", [ResData]);
         setListOfRestaurants(ResData);
         setFilteredRes(ResData);
     };

@@ -14,7 +14,7 @@ const RestaurantMenu = () => {
     if (resInfo === null) return <Shimmer />;
 
     const { name, cuisines, cloudinaryImageId, costForTwoMessage } = resInfo?.cards[0]?.card?.card?.info;
-    const { itemCards } = resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
+    // const { itemCards } = resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
     const categories = resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
         (c) => c.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
     );
@@ -23,7 +23,7 @@ const RestaurantMenu = () => {
     return (
         <div className='text-center'>
             <h1 className='font-bold text-2xl py-5'>{name}</h1>
-            {categories.map((category, index) => (
+            {categories && categories.map((category, index) => (
                 // Controlled Component
                 <RestaurantCategory
                     key={category?.card?.card?.title}

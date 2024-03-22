@@ -9,11 +9,14 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import Shimmer from "./components/Shimmer";
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import Cart from "./components/Cart";
 
 
 const AppLayout = () => {
   const [userName, setUserName] = useState("none");
-  
+
   useEffect(() => {
     const data = {
       name: "Priyank Singhal"
@@ -21,14 +24,16 @@ const AppLayout = () => {
     setUserName(data.name)
   }, [])
   return (
-    <UserContext.Provider value={{loggedInUser: userName, setUserName}}>
-      <div className="app">
-    {/* <UserContext.Provider value={{loggedInUser: "Singhal"}}> */}
-        <Header />
-    {/* </UserContext.Provider> */}
-        <Outlet />
-      </div>
-    </UserContext.Provider>
+    <Provider store={appStore}>
+      <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+        <div className="app">
+          {/* <UserContext.Provider value={{loggedInUser: "Singhal"}}> */}
+          <Header />
+          {/* </UserContext.Provider> */}
+          <Outlet />
+        </div>
+      </UserContext.Provider>
+    </Provider>
   )
 };
 
@@ -50,6 +55,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />
+      },
+      {
+        path: "/cart",
+        element: <Cart />
       },
       {
         path: "/drinks",

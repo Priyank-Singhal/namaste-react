@@ -17,7 +17,7 @@ const RestaurantCategory = ({ data, showItems, setShowItems }) => {
         <div>
           {showItems && data.itemCards.map(item =>{
             const CardInfo = item?.card?.info;
-            return <ItemList key={CardInfo.id} items = {CardInfo} />
+            return <ItemList key={CardInfo.id} item = {CardInfo} />
           } )}
         </div>
       </div>
